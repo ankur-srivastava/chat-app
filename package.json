@@ -1,0 +1,22 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "A chat app built using node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankur-srivastava/chat-app.git"
+  },
+  "author": "Ankur Srivastava",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ankur-srivastava/chat-app/issues"
+  },
+  "homepage": "https://github.com/ankur-srivastava/chat-app#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
