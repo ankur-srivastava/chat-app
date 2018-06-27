@@ -1,5 +1,6 @@
-# chat-app
+# Chat App
 A chat app built using node.js
 
-/server : node.js code
-/public : HTML's
+/server : for node.js code
+
+/public : for HTML's
