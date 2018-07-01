@@ -25,7 +25,17 @@ var io = socketIO(httpServer);
 
 /*When the client hits the server by accessing URL localhost:3000*/
 io.on('connection', (socket)=>{
-  console.log('new user connected');
+  socket.emit('newMessage', {
+    from: 'Admin',
+    text: 'Welcome to Chat App',
+    date: new Date().getTime()
+  });
+
+  socket.broadcast.emit('newMessage', {
+    from: 'Admin',
+    text: 'New user joined',
+    date: new Date().getTime()
+  });
 
   //When browser closes
   socket.on('disconnect', ()=>{
@@ -38,7 +48,11 @@ io.on('connection', (socket)=>{
     console.log('Message received from client', message);
 
     //Broadcast to all
-    io.emit('newMessage', {
+    //io.emit('newMessage', {
+    /*
+      Using socket.broadcast.emit does not sends the message to the one who created it.
+    */
+    socket.broadcast.emit('newMessage', {
       from: message.from,
       text: message.text,
       date: new Date().getTime()

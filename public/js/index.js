@@ -18,5 +18,5 @@ socket.on('disconnect', ()=>{
 //Custom Event
 
 socket.on('newMessage', (message)=>{
-  console.log('New Message received from server', message);
+  console.log('Message from server', message);
 });
