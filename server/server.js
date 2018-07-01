@@ -31,6 +31,26 @@ io.on('connection', (socket)=>{
   socket.on('disconnect', ()=>{
     console.log('Browser Closed');
   });
+
+  //Create a new custom event
+  socket.emit('newEmail', {
+    from:'ankur@gmail.com',
+    text:'Hello Ankur'
+  });
+
+  socket.emit('newMessage', {
+    from: 'Browser2',
+    text: 'New Message',
+    createdAt: 3456
+  });
+
+  socket.on('createMessage', (message)=>{
+    console.log('Create message received from client', message);
+  });
+
+  socket.on('createEmail', (newEmail)=>{
+    console.log('createEmail', newEmail);
+  });
 });
 
 //app.listen(port, ()=>{
