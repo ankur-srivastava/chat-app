@@ -3,6 +3,8 @@ const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
 
+const {generateMessage} = require('./utils/message');
+
 /*Use the path module to access public directory*/
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
@@ -25,17 +27,9 @@ var io = socketIO(httpServer);
 
 /*When the client hits the server by accessing URL localhost:3000*/
 io.on('connection', (socket)=>{
-  socket.emit('newMessage', {
-    from: 'Admin',
-    text: 'Welcome to Chat App',
-    date: new Date().getTime()
-  });
+  socket.emit('newMessage', generateMessage('Admin', 'Welcome to Chat App'));
 
-  socket.broadcast.emit('newMessage', {
-    from: 'Admin',
-    text: 'New user joined',
-    date: new Date().getTime()
-  });
+  socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
 
   //When browser closes
   socket.on('disconnect', ()=>{
@@ -52,11 +46,7 @@ io.on('connection', (socket)=>{
     /*
       Using socket.broadcast.emit does not sends the message to the one who created it.
     */
-    socket.broadcast.emit('newMessage', {
-      from: message.from,
-      text: message.text,
-      date: new Date().getTime()
-    });
+    socket.broadcast.emit('newMessage', generateMessage(message.from, message.text));
   });
 
 });
