@@ -4,11 +4,6 @@ var socket = io();
 
 socket.on('connect', ()=>{
   console.log('Connected to the Server');
-
-  socket.emit('createMessage', {
-    from:'browser1',
-    text:'When is the party'
-  });
 });
 
 socket.on('disconnect', ()=>{
@@ -19,4 +14,12 @@ socket.on('disconnect', ()=>{
 
 socket.on('newMessage', (message)=>{
   console.log('Message from server', message);
+});
+
+/*To handle acknowledgements add a third argument*/
+socket.emit('createMessage', {
+  from:'Client',
+  text:'When is the party'
+}, function(data){
+  console.log(data);
 });

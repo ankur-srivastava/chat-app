@@ -38,15 +38,17 @@ io.on('connection', (socket)=>{
 
   //Custom event
 
-  socket.on('createMessage', (message)=>{
+  socket.on('createMessage', (message, callback)=>{
     console.log('Message received from client', message);
 
     //Broadcast to all
-    //io.emit('newMessage', {
+    io.emit('newMessage', generateMessage(message.from, message.text));
     /*
       Using socket.broadcast.emit does not sends the message to the one who created it.
     */
-    socket.broadcast.emit('newMessage', generateMessage(message.from, message.text));
+    //socket.broadcast.emit('newMessage', generateMessage(message.from, message.text));
+    /*For Acknowledgement*/
+    callback('Acknowledgement from Server');
   });
 
 });
