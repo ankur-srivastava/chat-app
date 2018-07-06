@@ -38,7 +38,8 @@ io.on('connection', (socket)=>{
 
   //Custom event
 
-  socket.on('createMessage', (message, callback)=>{
+  socket.on('createMessage', (message)=>{
+    //socket.on('createMessage', (message, callback)=>{
     console.log('Message received from client', message);
 
     //Broadcast to all
@@ -48,7 +49,7 @@ io.on('connection', (socket)=>{
     */
     //socket.broadcast.emit('newMessage', generateMessage(message.from, message.text));
     /*For Acknowledgement*/
-    callback('Acknowledgement from Server');
+    //callback('Acknowledgement from Server');
   });
 
 });

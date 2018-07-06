@@ -13,13 +13,22 @@ socket.on('disconnect', ()=>{
 //Custom Event
 
 socket.on('newMessage', (message)=>{
-  console.log('Message from server', message);
+  var text = message.from+':'+message.text;
+  var node = document.createElement("LI");
+  var textnode = document.createTextNode(text);
+  node.appendChild(textnode);
+  document.getElementById("messages").appendChild(node);
 });
 
 /*To handle acknowledgements add a third argument*/
-socket.emit('createMessage', {
-  from:'Client',
-  text:'When is the party'
-}, function(data){
-  console.log(data);
-});
+function sendMessage(){
+  var formText = document.getElementById('messageText').value;
+  if(formText != ''){
+    socket.emit('createMessage', {
+      from: 'User',
+      text: formText
+    });
+  }else{
+    alert('Enter a Valid Value');
+  }
+}
